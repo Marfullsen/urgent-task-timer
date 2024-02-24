@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Left Time TTS</title>
+</head>
+<body>
+    <button onclick="talk()" type="button">hello world!</button>
+    <script>
+        var msg = new SpeechSynthesisUtterance();
+        msg.text = "Hello World!";
+        window.speechSynthesis.speak(msg);
+
+        function talk() {
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
