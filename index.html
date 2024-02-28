@@ -8,12 +8,18 @@
 <body>
     <button onclick="talk()" type="button">hello world!</button>
     <script>
-        var msg = new SpeechSynthesisUtterance();
-        msg.text = "Hello World!";
-        window.speechSynthesis.speak(msg);
-
-        function talk() {
+        if ('speechSynthesis' in window) {
+            // Speech Synthesis supported 🎉
+            var msg = new SpeechSynthesisUtterance();
+            msg.text = "Hello World!";
             window.speechSynthesis.speak(msg);
+
+            function talk() {
+                window.speechSynthesis.speak(msg);
+            }
+        }else{
+            // Speech Synthesis Not Supported 😣
+            alert("Sorry, your browser doesn't support text to speech!");
         }
     </script>
 </body>
