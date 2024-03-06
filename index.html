@@ -8,35 +8,47 @@
 <body>
     <main>
         <h1>Urgent Task Timer</h1>
-        <label for="lapso"><h2>I have only:</h2></label>
-        <select id="lapso">
-        <option value="30">30 min</option>
-        <option value="40">40 min</option>
-        <option value="50">50 min</option>
-        <option value="60" selected>1 hour</option>
-        </select>
-        <label for="frecuency"><h2>Let me know every:</h2></label>
-        <select id="frecuency">
-        <option value="1">1 min</option>
-        <option value="5">5 min</option>
-        <option value="10">10 min</option>
-        <option value="15" selected>15 min</option>
-        </select>
-        <br>
-        <br>
-        <button>Start</button>
-        <button>Reset</button>
+        <article>
+            <label for="frecuency"><h2>Let me know every:</h2></label>
+            <select id="frecuency">
+            <option value="1">1 min</option>
+            <option value="5">5 min</option>
+            <option value="10">10 min</option>
+            <option value="15" selected>15 min</option>
+            </select>
+        </article>
         <br>
         <hr>
+        <p>because</p>
+        <hr>
         <br>
-        <h2>I have time only until</h2>
-        <input type="time">
-        <button onclick="talk()" type="button">Start</button>
+        <article>
+            <h2>I have time only until</h2>
+            <input id="till" type="time" value="00:00">
+            <button onclick="talk()" type="button">Start</button>
+        </article>
+        <br>
+        <hr>
+        <p>or</p>
+        <hr>
+        <br>
+        <article>
+            <label for="lapso"><h2>I have only:</h2></label>
+            <select id="lapso">
+            <option value="30">30 min</option>
+            <option value="40">40 min</option>
+            <option value="50">50 min</option>
+            <option value="60" selected>1 hour</option>
+            </select>
+            <button>Start</button>
+        </article>
     </main>
     <script>
+        const HOUR = 1 * 60 * 60 * 1000
         let now = new Date()
-        let currentHour = now.getHours()
-        let nextHour = (currentHour > 23) ? 0 : currentHour + 1;
+        let oneHourMore = new Date()
+        oneHourMore.setTime(now.getTime() + HOUR)
+        till.value = oneHourMore.toTimeString().slice(0, 5);
         if ('speechSynthesis' in window) {
             // Speech Synthesis supported 🎉
             var msg = new SpeechSynthesisUtterance();
