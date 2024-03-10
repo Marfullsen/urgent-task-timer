@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Left Time TTS</title>
+    <title>Urgent Task Timer</title>
 </head>
 <body>
     <main>
@@ -33,8 +33,11 @@
         <hr>
         <br>
         <article>
-            <label for="lapso"><h2>I have only:</h2></label>
-            <select id="lapso">
+            <label for="lapse"><h2>I have only:</h2></label>
+            <select id="lapse">
+            <option value="5">5 min</option>
+            <option value="10">10 min</option>
+            <option value="15">15 min</option>
             <option value="30">30 min</option>
             <option value="40">40 min</option>
             <option value="50">50 min</option>
@@ -64,10 +67,27 @@
             total_minutes_left = Math.floor(Math.abs(till_time - now) / 60_000);
 
             //let now_in_hours_minutes = now.toTimeString().slice(0, 5);
-            let left_hours = Math.floor(total_minutes_left / 60) //till.value.split(':')[0] - now_in_hours_minutes.split(':')[0]
-            let left_minutes = Math.floor(total_minutes_left % 60) //till.value.split(':')[1] - now_in_hours_minutes.split(':')[1]
+            let left_hours = Math.floor(total_minutes_left / 60);
+            let left_minutes = Math.floor(total_minutes_left % 60);
+
+            /* TEST HOUR AND MINUTES LEFT */
             /* console.log(left_hours + 'HOUR'); */
             /* console.log(left_minutes + 'MIN'); */
+            console.log(now)
+            console.log(till_time);
+
+            let timer = setInterval(function(){
+                console.log(lapse_countdown);
+
+                talk(lapse_countdown)
+                lapse_countdown = lapse_countdown - frecuency.value;
+                if (lapse_countdown < 0) {
+                    clearInterval(timer);
+                    console.log('started at:\n' + now + '\n\n');
+                    console.log('ended at:\n' + new Date());
+                }
+            }, 1000 * 60);
+
             hour_or_plural = left_hours > 0 ? 'hours' : 'hour'
             minute_or_plural = left_minutes > 0 ? 'minutes' : 'minute'
             if (left_hours > 0 && left_minutes > 0) {
@@ -81,11 +101,28 @@
             }
         }
         function lapso() {
-            talk('lapse')
-            talk(frecuency.value + " minutes")
+            console.log('LAPSE');
+            let msg = "";
+            msg += 'Lapse. '
+            /* msg += "Frecuency: " + frecuency.value + " minutes. " */
+            msg += "You have only " + lapse.value + " minutes."
+            talk(msg)
+
+            let lapse_countdown = lapse.value
+            console.log(lapse_countdown);
+            let timer = setInterval(function(){
+                lapse_countdown = lapse_countdown - frecuency.value;
+                console.log(lapse_countdown);
+                talk(lapse_countdown);
+                if (lapse_countdown == 0) {
+                    clearInterval(timer);
+                    talk('TIME IS OVER!')
+                    console.log('FIN');
+                }
+            }, 1000 * 60 * frecuency.value );
         }
         if ('speechSynthesis' in window) {
-            // Speech Synthesis supported 🎉
+               // Speech Synthesis supported 🎉
             var msg = new SpeechSynthesisUtterance();
 
             function talk(msg_input) {
