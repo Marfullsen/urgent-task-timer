@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="./docs/img/left_time_tts.png" alt="icon">
+  <!-- <img src="./docs/img/urgent_task_timer.png" alt="icon"> -->
 </div>
 
 <div align="center">
 
-# Left Time TTS
+# Urgent Task Timer
 
-Left Time TTS (tiempo restante tts) es una aplicación que te permitirá comprender mejor la cantidad de tiempo restante para alguna tarea, configurable en dos modos, "Fijar hora" (estilo alarma), y "Lapso" (estilo timer).
+Urgent Task Timer (Timer de tareas urgentes) es una aplicación que te permitirá saber mediante alertas sobre la cantidad de tiempo restante para alguna tarea, configurable en dos modos, "Fijar hora" (estilo alarma), y "Lapso" (estilo timer).
 
 </div>
 
